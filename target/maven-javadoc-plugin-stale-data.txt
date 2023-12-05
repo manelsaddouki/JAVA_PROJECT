@@ -1,0 +1,47 @@
+@options
+@packages
+-encoding
+'UTF-8'
+-protected
+-source
+'11'
+-sourcepath
+'C:/Users/Manel Saddouki/Documents/NetBeansProjects/Final_Project/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2023. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/Manel Saddouki/Documents/NetBeansProjects/Final_Project/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'Final_Project 1.0-SNAPSHOT API'
+-linkoffline
+'https://docs.oracle.com/en/java/javase/11/docs/api' 'C:/Users/Manel Saddouki/Documents/NetBeansProjects/Final_Project/target/javadoc-bundle-options'
+-use
+-version
+-windowtitle
+'Final_Project 1.0-SNAPSHOT API'
+com.mycompany.final_project
+C:\Users\Manel Saddouki\Documents\NetBeansProjects\Final_Project\src\main\java = 1701334875009
+C:\Users\Manel Saddouki\Documents\NetBeansProjects\Final_Project\target\site\apidocs\allclasses-index.html = 1701766878067
+C:\Users\Manel Saddouki\Documents\NetBeansProjects\Final_Project\target\site\apidocs\allclasses.html = 1701766878110
+C:\Users\Manel Saddouki\Documents\NetBeansProjects\Final_Project\target\site\apidocs\allpackages-index.html = 1701766878067
+C:\Users\Manel Saddouki\Documents\NetBeansProjects\Final_Project\target\site\apidocs\constant-values.html = 1701766877905
+C:\Users\Manel Saddouki\Documents\NetBeansProjects\Final_Project\target\site\apidocs\deprecated-list.html = 1701766878078
+C:\Users\Manel Saddouki\Documents\NetBeansProjects\Final_Project\target\site\apidocs\element-list = 1701766877842
+C:\Users\Manel Saddouki\Documents\NetBeansProjects\Final_Project\target\site\apidocs\help-doc.html = 1701766878141
+C:\Users\Manel Saddouki\Documents\NetBeansProjects\Final_Project\target\site\apidocs\index-all.html = 1701766878047
+C:\Users\Manel Saddouki\Documents\NetBeansProjects\Final_Project\target\site\apidocs\index.html = 1701766878110
+C:\Users\Manel Saddouki\Documents\NetBeansProjects\Final_Project\target\site\apidocs\member-search-index.js = 1701766878047
+C:\Users\Manel Saddouki\Documents\NetBeansProjects\Final_Project\target\site\apidocs\member-search-index.zip = 1701766878047
+C:\Users\Manel Saddouki\Documents\NetBeansProjects\Final_Project\target\site\apidocs\overview-tree.html = 1701766877985
+C:\Users\Manel Saddouki\Documents\NetBeansProjects\Final_Project\target\site\apidocs\package-search-index.js = 1701766878016
+C:\Users\Manel Saddouki\Documents\NetBeansProjects\Final_Project\target\site\apidocs\package-search-index.zip = 1701766878031
+C:\Users\Manel Saddouki\Documents\NetBeansProjects\Final_Project\target\site\apidocs\script.js = 1701766878163
+C:\Users\Manel Saddouki\Documents\NetBeansProjects\Final_Project\target\site\apidocs\search.js = 1701766878166
+C:\Users\Manel Saddouki\Documents\NetBeansProjects\Final_Project\target\site\apidocs\stylesheet.css = 1701766878159
+C:\Users\Manel Saddouki\Documents\NetBeansProjects\Final_Project\target\site\apidocs\type-search-index.js = 1701766878031
+C:\Users\Manel Saddouki\Documents\NetBeansProjects\Final_Project\target\site\apidocs\type-search-index.zip = 1701766878047
