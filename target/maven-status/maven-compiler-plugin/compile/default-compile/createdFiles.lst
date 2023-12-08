@@ -1,5 +1,6 @@
 com\mycompany\final_project\Product.class
 com\mycompany\final_project\InventoryManager.class
 com\mycompany\final_project\Final_Project.class
+com\mycompany\final_project\ProductFileHandler.class
 com\mycompany\final_project\ManageTransactions.class
 com\mycompany\final_project\Transaction.class

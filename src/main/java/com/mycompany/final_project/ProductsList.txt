@@ -1,0 +1,9 @@
+201,"Cozy Hoodie","Hoodie",10,43.99,12.99
+202,"Comfy Hoodie","Hoodie",20,43.99,12.99
+301,Cozy,"Tote Bag",44,19.99,7.99
+302,Cozy,"Tote Bag",47,19.99,7.99
+401,"Cat Keychain","Keychain",20,4.99,2.99
+501,"Cozy Socks","Socks",29,19.99,7.99
+701,"Palestine Hoodie","Palestine",40,43.99,12.99
+702,"Gaza Tote Bag","Palestine",40,19.99,7.99
+703,"Keffiyah Tote Bag","Palestine",40,19.99,7.99

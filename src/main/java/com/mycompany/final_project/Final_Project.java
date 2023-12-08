@@ -9,72 +9,211 @@ package com.mycompany.final_project;
  * @author Manel Saddouki
  */
 
+import com.mycompany.final_project.TransactionFileHandler;
 import java.util.*;
 
 public class Final_Project {
 
     public static void main(String[] args) {
-        // initialize the products we have 
-        Product product1 = new Product (201, "Cozy Hoodie", "Hoodie", 40, 43.99,12.99 );
-        Product product2 = new Product (202, "Comfy Hoodie", "Hoodie", 35, 43.99,12.99 );
-        Product product3 = new Product (301, "Canvas Tote Bag", "Tote Bag", 25, 19.99,7.99 );
-        Product product4 = new Product (301, "Tote Bag Stripes", "Tote Bag", 30, 19.99,7.99 );
-        Product product5 = new Product (401, "Cat Keychain", "Keychain", 20, 4.99,2.99 );
-        Product product6 = new Product (501, "Cozy Socks", "Socks", 30, 19.99,7.99 );
-        Product product7 = new Product (601, "Palestine Hoodie", "Palestine", 40, 43.99,12.99 );
-        Product product8 = new Product (701, "Gaza Tote Bag", "Palestine", 40, 19.99,7.99 );
-        Product product9 = new Product (701, "Keffiyah Tote Bag", "Palestine", 40, 19.99,7.99 );
-    
         // initialize Inventory list
-        List <Product> myproducts = List.of(product1, product3, product4, product5, product6, product7, product8, product9);
+        List<Product> myproducts = ProductFileHandler.readProductsFromFile("ProductsList.txt");
         InventoryManager MystoreInventory = new InventoryManager(myproducts);
-        
-        // initialize some transactions
-        Transaction trans1 = new Transaction (myproducts, 401, 5);
-        Transaction trans2 = new Transaction (myproducts, 201, 7);
-        
-        // using ManageTransactions constructor, we will initialize the list of transactions we have.
-        List <Transaction> mytransactions = List.of(trans1, trans2);
-        ManageTransactions MyTransactionsManager = new ManageTransactions(myproducts, mytransactions);
-        
-        /* now my store has: 
-        MystoreInventory (list of products I have in as inventory)
-        MyTransactionsManager (list of transactions I have) */
-        
-       // now I can add any transaction:
-       MyTransactionsManager.NewTransaction(501,1);
-       
-       
-       // test update of product quantity after the transaction 
-       System.out.println(product5.getQuantity()); // product 401, it should be 20-5=15
-       System.out.println(product1.getQuantity()); // product 201, it should be 40-7=33
-       System.out.println(product6.getQuantity()); // product 501, it should be 30-1=29
-       
-       // test different methods for inventory manager class: 
-       System.out.println(MystoreInventory.SpecificCategoryExpectedProfit("Hoodie"));
-       
-       for (String element: MystoreInventory.ProductList())
-       {System.out.print (element +" / ");}
-       System.out.println();
-       
-       MystoreInventory.AddProduct(product2);
-       for (String element: MystoreInventory.ProductList())
-       {System.out.print(element +" / ");} // comfy hoodie should be added to the list 
-       System.out.println();
-       
-       for (String element: MystoreInventory.CategoriesList())
-       {System.out.print(element +"/ ");}
-       System.out.println();
-       
-       for (String element: MystoreInventory.SpecificCategoryProductList("Palestine"))
-       {System.out.print(element +" / ");} // comfy hoodie should be added to the list 
-       System.out.println();
-       
-       // test methods in product class: 
-       System.out.println (product1.getProductCategory()+ " " + product1.getProductName() + " " +product1.getUnitPrice()+ " " + product1.getQuantity());
-       
-       product1.addQuantity(5); 
-       System.out.println ( product1.getQuantity());
-        // here we will create an excel sheet that has all the inventory we have 
+
+        List<Transaction> myTransactions = TransactionsFileHandler.readTransactionsFromFile(myproducts,
+                "TransactionsList.txt");
+
+        ManageTransactions MystoreTransactions = new ManageTransactions(myproducts, myTransactions);
+
+        SalesReportGenerator mystoreReport = new SalesReportGenerator(MystoreTransactions.getTransactionsList());
+
+        for (String element : MystoreInventory.SpecificCategoryProductList("Hoodie")) {
+            System.out.print(element + "  ");
+        }
+
+        int repeat = 1;
+        while (repeat == 1) {
+            // display:
+            System.out.println(" \n \n Admin Menu:");
+            System.out.println("1. Inventory Products Information");
+            System.out.println("2. Specific Products Information based on its ID");
+            System.out.println("3. Update data about one of your Products based on its ID");
+            System.out.println("4. Inventory Manipulation");
+            System.out.println("5. New Transaction");
+            System.out.println("6. List of all Transactions");
+            System.out.println("7. Sales Reports");
+            System.out.println("8. Employees");
+            // System.out.println("6. Action 6");
+            System.out.print("Enter your choice: ");
+
+            Scanner scanner = new Scanner(System.in);
+            int choice = scanner.nextInt();
+            switch (choice) {
+                case 1:
+                    // Products Functions
+                    System.out.println("Admin Menu:");
+                    System.out.println(
+                            "1. Get Product ID List \n2. Get Product Names List \n3. Get Product Category List \n4. Get Specific Category Product List");
+                    int cc = scanner.nextInt();
+                    switch (cc) {
+                        case 1:
+                            for (int element : MystoreInventory.ProductIDsList()) {
+                                System.out.print(element + "  ");
+                            }
+                            System.out.println();
+                            break;
+                        case 2:
+                            for (String el : MystoreInventory.ProductNamesList()) {
+                                System.out.print(el + "  ");
+                            }
+                            System.out.println();
+                            break;
+                        case 3:
+                            for (String elem : MystoreInventory.CategoriesList()) {
+                                System.out.print(elem + "  ");
+                            }
+                            System.out.println();
+                            break;
+                        case 4:
+                            System.out.println("Enter the Category you are looking for: ");
+                            String category = scanner.next();
+                            System.out.println(category);
+                            for (String element : MystoreInventory.SpecificCategoryProductList(category)) {
+                                System.out.print(element + "  ");
+                            }
+                            System.out.println();
+                            break;
+                        default:
+                            System.out.println("Invalid choice.");
+                    }
+                    break;
+
+                case 2:
+                    // Get specific product data
+                    System.out.println("Enter the id of the product:");
+                    int id = scanner.nextInt();
+                    System.out.println("Admin Menu:");
+                    System.out.println("1. Get Product Name \n2. Get Product Category \n3. Get product Quantity");
+                    int c = scanner.nextInt();
+                    switch (c) {
+                        case 1:
+                            System.out.print("Product name is: " + MystoreInventory.GetProductName(id));
+                            System.out.println();
+                            break;
+                        case 2:
+                            System.out.print("Product name is: " + MystoreInventory.GetProductCategory(id));
+                            System.out.println();
+                            break;
+                        case 3:
+                            System.out.print("Product name is: " + MystoreInventory.GetProductQuantity(id));
+                            System.out.println();
+                            break;
+                        default:
+                            System.out.println("Invalid choice.");
+                    }
+                    break;
+
+                case 3:
+                    // update product data
+                    System.out.println("Enter the id of the product:");
+                    int ind = scanner.nextInt();
+                    System.out.println("Admin Menu:");
+                    System.out.println(
+                            "1. set Product Name  \n2. Set Product Category  \n3. Set product Quantity \n4. add product Quantity");
+                    int ch = scanner.nextInt();
+                    switch (ch) {
+                        case 1:
+                            System.out.println("Enter the new name for your product:");
+                            String N = scanner.next();
+                            MystoreInventory.SetProductName(ind, N);
+                            ProductFileHandler.writeProductsToFile(MystoreInventory.getList(), "ProductsList.txt");
+                            break;
+                        case 2:
+                            System.out.println("Enter the new category for your product:");
+                            String categ = scanner.next();
+                            MystoreInventory.SetProductCategory(ind, categ);
+                            ProductFileHandler.writeProductsToFile(MystoreInventory.getList(), "ProductsList.txt");
+                            break;
+                        case 3:
+                            System.out.println("Update the quantity for your product:");
+                            int quant = scanner.nextInt();
+                            MystoreInventory.SetProductQuantity(ind, quant);
+                            ProductFileHandler.writeProductsToFile(MystoreInventory.getList(), "ProductsList.txt");
+                            break;
+                        case 4:
+                            System.out.println("Add quantity for your product:");
+                            int quantity = scanner.nextInt();
+                            MystoreInventory.addQuantity(ind, quantity);
+                            ProductFileHandler.writeProductsToFile(MystoreInventory.getList(), "ProductsList.txt");
+                            break;
+                        default:
+                            System.out.println("Invalid choice.");
+                    }
+                    break;
+
+                case 4:
+                    // Manipulate inventory
+                    System.out.println("Admin Menu:");
+                    System.out.println("1. Add new Product \n 2.Delete a product");
+                    int chx = scanner.nextInt();
+                    switch (chx) {
+                        case 1:
+                            System.out.println("Enter the id for your product:");
+                            int prodid = scanner.nextInt();
+                            System.out.println("Enter the name for your product:");
+                            String prodname = scanner.next();
+                            System.out.println("Enter the category for your product:");
+                            String prodcateg = scanner.next();
+                            System.out.println("Enter the quantity for your product:");
+                            int prodquant = scanner.nextInt();
+                            System.out.println("Enter the unit price for your product:");
+                            double produnitpr = scanner.nextDouble();
+                            System.out.println("Enter the unit profit for your product:");
+                            double produnitprof = scanner.nextDouble();
+                            Product NewProduct = new Product(prodid, prodname, prodcateg, prodquant, produnitpr,
+                                    produnitprof);
+                            MystoreInventory.AddProduct(NewProduct);
+                            ProductFileHandler.writeProductsToFile(MystoreInventory.getList(), "ProductsList.txt");
+                            break;
+
+                        case 2:
+                            System.out.println("Enter the id of the product:");
+                            int index = scanner.nextInt();
+                            MystoreInventory.DeleteProduct(index);
+                            ProductFileHandler.writeProductsToFile(MystoreInventory.getList(), "ProductsList.txt");
+                            break;
+
+                        default:
+                            System.out.println("Invalid choice.");
+                    }
+                    break;
+                case 5:
+                    // add new transaction
+                    System.out.println("Enter the id for your product:");
+                    int prodind = scanner.nextInt();
+                    System.out.println("Enter the quantity sold:");
+                    int quantSold = scanner.nextInt();
+                    MystoreTransactions.NewTransaction(prodind, quantSold);
+                    TransactionsFileHandler.writeProductsToFile(MystoreTransactions.getTransactionsList(),
+                            "TransactionsList.txt");
+                    ProductFileHandler.writeProductsToFile(MystoreInventory.getList(), "ProductsList.txt");
+                    break;
+
+                case 6:
+                    // list of all the transactions
+                    for (Transaction trans : MystoreTransactions.getTransactionsList()) {
+                        System.out.println(
+                                "Id: " + trans.getTransactionId() + " Date: " + trans.getDate() + " Product ID: "
+                                        + trans.getProductId() + " Quantity: " + trans.getTransactionQuantity());
+                    }
+                    break;
+
+                case 7:
+                    mystoreReport.generateSalesReport();
+                    break;
+                default:
+                    System.out.println("Invalid choice.");
+            }
+
+        }
     }
 }
