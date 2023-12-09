@@ -1,15 +1,15 @@
-201,"Cozy Hoodie","Hoodie",40,$34.99,$12.99
-202,"Comfy Hoodie","Hoodie",35,$34.99,$12.99
-203,"Warm Hoodie","Hoodie",50,$34.99,$12.99
-301,"Canvas Tote Bag","Tote Bag",25,$19.99,$7.99
-302,"Tote Bag - Stripes","Tote Bag",30,$19.99,$7.99
-303,"Cute Keychain - Cat","Keychain",20,$4.99,$2.99
-401,"Charm Keychain - Heart","Keychain",45,$4.99,$2.99
-402,"Cozy Socks - Polka Dot","Socks",40,$6.99,$3.49
-403,"Warm Socks - Striped","Socks",35,$6.99,$3.49
-501,"Reusable Water Bottle","Water Bottle",60,$12.99,$5.99
-502,"Palestinian Flag Hoodie","Palestine",50,$34.99,$12.99
-503,"Gaza Strip Hoodie","Palestine",45,$34.99,$12.99
-601,"Gaza Strip Tote Bag","Palestine",30,$19.99,$7.99
-602,"Keffiyeh Tote Bag","Palestine",25,$19.99,$7.99
-603,"Palestinian Tote Bag","Palestine",20,$19.99,$7.99
+201,"Cozy Hoodie","Hoodie",40,34.99,12.99
+202,"Comfy Hoodie","Hoodie",35,34.99,12.99
+203,"Warm Hoodie","Hoodie",50,34.99,12.99
+301,"Canvas Tote Bag","Tote Bag",25,19.99,7.99
+302,"Tote Bag - Stripes","Tote Bag",30,19.99,7.99
+303,"Cute Keychain - Cat","Keychain",20,4.99,2.99
+401,"Charm Keychain - Heart","Keychain",45,4.99,2.99
+402,"Cozy Socks - Polka Dot","Socks",40,6.99,3.49
+403,"Warm Socks - Striped","Socks",35,6.99,3.49
+501,"Reusable Water Bottle","Water Bottle",60,12.99,5.99
+502,"Palestinian Flag Hoodie","Palestine",50,34.99,12.99
+503,"Gaza Strip Hoodie","Palestine",45,34.99,12.99
+601,"Gaza Strip Tote Bag","Palestine",30,19.99,7.99
+602,"Keffiyeh Tote Bag","Palestine",25,19.99,7.99
+603,"Palestinian Tote Bag","Palestine",20,19.99,7.99
