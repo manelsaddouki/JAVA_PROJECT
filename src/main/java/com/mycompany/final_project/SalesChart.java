@@ -1,14 +1,21 @@
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.pdfbox.pdmodel.font.Standard14Fonts;
+import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartPanel;
+import org.jfree.chart.ChartUtilities; // Corrected import statement
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.CategoryAxis;
-import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.CategoryLabelPositions;
+import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 import javax.swing.*;
+import java.io.IOException;
 import java.util.List;
 
 public class SalesChart {
@@ -19,18 +26,13 @@ public class SalesChart {
         this.salesTransactions = salesTransactions;
     }
 
-    // Generate a bar chart for sales trends
-    public void generateSalesTrendsChart() {
+    // Generate a bar chart for sales trends and export it to a PDF file
+    public void generateSalesTrendsChartToPDF(String pdfFilePath) {
         CategoryDataset dataset = createDataset();
         JFreeChart chart = createBarChart(dataset);
 
-        // Display the chart in a Swing frame
-        JFrame frame = new JFrame("Sales Trends Chart");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add(new ChartPanel(chart));
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+        // Save the chart to a PDF file
+        saveChartToPDF(chart, pdfFilePath);
     }
 
     // Helper method to create a dataset for the bar chart
@@ -64,5 +66,38 @@ public class SalesChart {
         rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
 
         return chart;
+    }
+
+    // Helper method to save the chart to a PDF file
+    private void saveChartToPDF(JFreeChart chart, String pdfFilePath) {
+        try (PDDocument document = new PDDocument()) {
+            PDPage page = new PDPage();
+            document.addPage(page);
+
+            PDPageContentStream contentStream = new PDPageContentStream(document, page);
+
+            // Load a standard Type 1 font
+            PDType1Font font = new PDType1Font(Standard14Fonts.FontName.HELVETICA_BOLD); // Example with HELVETICA_BOLD
+            contentStream.setFont(font, 12);
+
+            contentStream.beginText();
+            contentStream.newLineAtOffset(50, 700);
+            contentStream.showText("Sales Trends Over Time");
+            contentStream.endText();
+
+            contentStream.drawImage(PDImageXObject.createFromByteArray(document,
+                    ChartUtilities.encodeAsPNG(chart.createBufferedImage(600, 400)),
+                    "SalesChart"), 50, 250, 500, 300);
+
+            contentStream.close();
+
+            document.save(pdfFilePath);
+            document.close();
+
+            System.out.println("Sales chart exported to PDF successfully.");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
