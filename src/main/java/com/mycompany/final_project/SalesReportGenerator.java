@@ -190,7 +190,7 @@ public class SalesReportGenerator {
         }
 
         System.out.println("Total Fundraising Revenue: $" + fundraisingRevenue);
-        System.out.println("Total Fundraising Profit: $" + fundraisingProfit);
+        System.out.println("Total Fundraising Profit: $" + fundraisingProfit + ". All this profit will be donated to Palestine.");
         System.out.println("-----------------------------");
     }
 
