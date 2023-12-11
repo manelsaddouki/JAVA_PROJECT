@@ -16,7 +16,9 @@ import org.jfree.data.category.DefaultCategoryDataset;
 
 import javax.swing.*;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SalesChart {
     private List<Transaction> salesTransactions;
@@ -36,15 +38,35 @@ public class SalesChart {
     }
 
     // Helper method to create a dataset for the bar chart
-    private CategoryDataset createDataset() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+    // Helper method to create a dataset for the bar chart
+private CategoryDataset createDataset() {
+    DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
-        for (Transaction transaction : salesTransactions) {
-            dataset.addValue(transaction.getTransactionQuantity(), "Sales", transaction.getDate().toString());
-        }
+    // Map to store aggregated total quantity for each date
+    Map<String, Integer> totalQuantityByDate = new HashMap<>();
 
-        return dataset;
+    for (Transaction transaction : salesTransactions) {
+        String date = transaction.getDate().toString();
+        int quantity = transaction.getTransactionQuantity();
+
+        // Update the total quantity for the date
+        totalQuantityByDate.put(date, totalQuantityByDate.getOrDefault(date, 0) + quantity);
     }
+
+    // Sort the dates in ascending order
+    List<String> sortedDates = totalQuantityByDate.keySet().stream()
+            .sorted()
+            .toList();
+
+    // Add data to the dataset in ascending order
+    for (String date : sortedDates) {
+        dataset.addValue(totalQuantityByDate.get(date), "Sales", date);
+    }
+
+    return dataset;
+}
+
+
 
     // Helper method to create a bar chart
     private JFreeChart createBarChart(CategoryDataset dataset) {
