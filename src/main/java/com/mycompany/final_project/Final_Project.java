@@ -1,11 +1,12 @@
 import java.util.*;
 
-public class Final_Project {
-    
+public class Java_Project {
+
     public static void main(String[] args) {
-        List<Employee> employees = EmployeeFileHandler.readEmployeesFromFile("EmployeesList.txt");
+        List<Employee> employees = EmployeeFileHandler.readEmployeesFromFile(
+                "C:\\Users\\Manel Saddouki\\Desktop\\Java project\\Java_Project\\src\\EmployeesList.txt");
         Employee authenticatedUser = authenticateUser(employees);
-    
+
         if (authenticatedUser != null) {
             switch (authenticatedUser.getRole()) {
                 case "admin":
@@ -24,24 +25,21 @@ public class Final_Project {
 
     private static void adminMenu() {
         // initialize Inventory list
-        List<Product> myproducts = ProductFileHandler.readProductsFromFile("ProductsList.txt");
+        List<Product> myproducts = ProductFileHandler.readProductsFromFile(
+                "C:\\Users\\Manel Saddouki\\Desktop\\Java project\\Java_Project\\src\\ProductsList.txt");
         InventoryManager MystoreInventory = new InventoryManager(myproducts);
 
         List<Transaction> myTransactions = TransactionsFileHandler.readTransactionsFromFile(myproducts,
-                "TransactionsList.txt");
+                "C:\\Users\\Manel Saddouki\\Desktop\\Java project\\Java_Project\\src\\TransactionsList.txt");
 
         ManageTransactions MystoreTransactions = new ManageTransactions(myproducts, myTransactions);
 
         SalesReportGenerator mystoreReport = new SalesReportGenerator(MystoreTransactions.getTransactionsList());
 
-        for (String element : MystoreInventory.SpecificCategoryProductList("Hoodie")) {
-            System.out.print(element + "  ");
-        }
-
         try (Scanner scanner = new Scanner(System.in)) {
             int repeat = 1;
             while (repeat == 1) {
-            // display:
+                // display:
                 System.out.println(" \n \n Admin Menu:");
                 System.out.println("1. Inventory Products Information");
                 System.out.println("2. Specific Products Information based on its ID");
@@ -52,14 +50,13 @@ public class Final_Project {
                 System.out.println("7. Sales Reports");
                 System.out.print("Enter your choice: ");
 
-            
                 int choice = scanner.nextInt();
                 switch (choice) {
                     case 1:
                         // Products Functions
                         System.out.println("Admin Menu:");
                         System.out.println(
-                                "1. Get Product ID List \n2. Get Product Names List \n3. Get Product Category List \n4. Get Specific Category Product List");
+                                "1. Get Product ID List \n2. Get Product Names List \n3. Get Product Category List");
                         int cc = scanner.nextInt();
                         switch (cc) {
                             case 1:
@@ -77,15 +74,6 @@ public class Final_Project {
                             case 3:
                                 for (String elem : MystoreInventory.CategoriesList()) {
                                     System.out.print(elem + "  ");
-                                }
-                                System.out.println();
-                                break;
-                            case 4:
-                                System.out.println("Enter the Category you are looking for: ");
-                                String category = scanner.next();
-                                System.out.println(category);
-                                for (String element : MystoreInventory.SpecificCategoryProductList(category)) {
-                                    System.out.print(element + "  ");
                                 }
                                 System.out.println();
                                 break;
@@ -107,11 +95,11 @@ public class Final_Project {
                                 System.out.println();
                                 break;
                             case 2:
-                                System.out.print("Product name is: " + MystoreInventory.GetProductCategory(id));
+                                System.out.print("Product category is: " + MystoreInventory.GetProductCategory(id));
                                 System.out.println();
                                 break;
                             case 3:
-                                System.out.print("Product name is: " + MystoreInventory.GetProductQuantity(id));
+                                System.out.print("Product quantity is: " + MystoreInventory.GetProductQuantity(id));
                                 System.out.println();
                                 break;
                             default:
@@ -125,32 +113,31 @@ public class Final_Project {
                         int ind = scanner.nextInt();
                         System.out.println("Admin Menu:");
                         System.out.println(
-                                "1. set Product Name  \n2. Set Product Category  \n3. Set product Quantity \n4. add product Quantity");
+                                "1. set Product Name  \n2. Set Product Category  \n3. Set product Quantity");
                         int ch = scanner.nextInt();
                         switch (ch) {
                             case 1:
-                                System.out.println("Enter the new name for your product:");
-                                String N = scanner.next();
+                                System.out.println("Enter the new name for your product: ");
+                                scanner.nextLine();
+                                String N = scanner.nextLine();
                                 MystoreInventory.SetProductName(ind, N);
-                                ProductFileHandler.writeProductsToFile(MystoreInventory.getList(), "ProductsList.txt");
+                                ProductFileHandler.writeProductsToFile(MystoreInventory.getList(),
+                                        "C:\\Users\\Manel Saddouki\\Desktop\\Java project\\Java_Project\\src\\ProductsList.txt");
                                 break;
                             case 2:
                                 System.out.println("Enter the new category for your product:");
-                                String categ = scanner.next();
+                                scanner.nextLine();
+                                String categ = scanner.nextLine();
                                 MystoreInventory.SetProductCategory(ind, categ);
-                                ProductFileHandler.writeProductsToFile(MystoreInventory.getList(), "ProductsList.txt");
+                                ProductFileHandler.writeProductsToFile(MystoreInventory.getList(),
+                                        "C:\\Users\\Manel Saddouki\\Desktop\\Java project\\Java_Project\\src\\ProductsList.txt");
                                 break;
                             case 3:
-                                System.out.println("Update the quantity for your product:");
+                                System.out.println("Set the quantity for your product:");
                                 int quant = scanner.nextInt();
                                 MystoreInventory.SetProductQuantity(ind, quant);
-                                ProductFileHandler.writeProductsToFile(MystoreInventory.getList(), "ProductsList.txt");
-                                break;
-                            case 4:
-                                System.out.println("Add quantity for your product:");
-                                int quantity = scanner.nextInt();
-                                MystoreInventory.addQuantity(ind, quantity);
-                                ProductFileHandler.writeProductsToFile(MystoreInventory.getList(), "ProductsList.txt");
+                                ProductFileHandler.writeProductsToFile(MystoreInventory.getList(),
+                                        "C:\\Users\\Manel Saddouki\\Desktop\\Java project\\Java_Project\\src\\ProductsList.txt");
                                 break;
                             default:
                                 System.out.println("Invalid choice.");
@@ -160,16 +147,17 @@ public class Final_Project {
                     case 4:
                         // Manipulate inventory
                         System.out.println("Admin Menu:");
-                        System.out.println("1. Add new Product \n 2.Delete a product");
+                        System.out.println("1. Add new Product \n2. Delete a product");
                         int chx = scanner.nextInt();
                         switch (chx) {
                             case 1:
                                 System.out.println("Enter the id for your product:");
                                 int prodid = scanner.nextInt();
                                 System.out.println("Enter the name for your product:");
-                                String prodname = scanner.next();
+                                scanner.nextLine();
+                                String prodname = scanner.nextLine();
                                 System.out.println("Enter the category for your product:");
-                                String prodcateg = scanner.next();
+                                String prodcateg = scanner.nextLine();
                                 System.out.println("Enter the quantity for your product:");
                                 int prodquant = scanner.nextInt();
                                 System.out.println("Enter the unit price for your product:");
@@ -179,14 +167,16 @@ public class Final_Project {
                                 Product NewProduct = new Product(prodid, prodname, prodcateg, prodquant, produnitpr,
                                         produnitprof);
                                 MystoreInventory.AddProduct(NewProduct);
-                                ProductFileHandler.writeProductsToFile(MystoreInventory.getList(), "ProductsList.txt");
+                                ProductFileHandler.writeProductsToFile(MystoreInventory.getList(),
+                                        "C:\\Users\\Manel Saddouki\\Desktop\\Java project\\Java_Project\\src\\ProductsList.txt");
                                 break;
 
                             case 2:
                                 System.out.println("Enter the id of the product:");
                                 int index = scanner.nextInt();
                                 MystoreInventory.DeleteProduct(index);
-                                ProductFileHandler.writeProductsToFile(MystoreInventory.getList(), "ProductsList.txt");
+                                ProductFileHandler.writeProductsToFile(MystoreInventory.getList(),
+                                        "C:\\Users\\Manel Saddouki\\Desktop\\Java project\\Java_Project\\src\\ProductsList.txt");
                                 break;
 
                             default:
@@ -201,8 +191,9 @@ public class Final_Project {
                         int quantSold = scanner.nextInt();
                         MystoreTransactions.NewTransaction(prodind, quantSold);
                         TransactionsFileHandler.writeProductsToFile(MystoreTransactions.getTransactionsList(),
-                                "TransactionsList.txt");
-                        ProductFileHandler.writeProductsToFile(MystoreInventory.getList(), "ProductsList.txt");
+                                "C:\\Users\\Manel Saddouki\\Desktop\\Java project\\Java_Project\\src\\TransactionsList.txt");
+                        ProductFileHandler.writeProductsToFile(MystoreInventory.getList(),
+                                "C:\\Users\\Manel Saddouki\\Desktop\\Java project\\Java_Project\\src\\ProductsList.txt");
                         break;
 
                     case 6:
@@ -228,36 +219,31 @@ public class Final_Project {
             System.out.println("Session Expired. Please log in again!");
         }
     }
-        
-
 
     private static void salespersonMenu() {
         // initialize Inventory list
-        List<Product> myproducts = ProductFileHandler.readProductsFromFile("ProductsList.txt");
+        List<Product> myproducts = ProductFileHandler.readProductsFromFile(
+                "C:\\Users\\Manel Saddouki\\Desktop\\Java project\\Java_Project\\src\\ProductsList.txt");
         InventoryManager MystoreInventory = new InventoryManager(myproducts);
 
         List<Transaction> myTransactions = TransactionsFileHandler.readTransactionsFromFile(myproducts,
-                "TransactionsList.txt");
+                "C:\\Users\\Manel Saddouki\\Desktop\\Java project\\Java_Project\\src\\TransactionsList.txt");
 
-        ManageTransactions MystoreTransactions = new ManageTransactions(myproducts, myTransactions);
+        ManageTransactions MystoreTransactions = new ManageTransactions(MystoreInventory.getList(), myTransactions);
 
         SalesReportGenerator mystoreReport = new SalesReportGenerator(MystoreTransactions.getTransactionsList());
 
-        for (String element : MystoreInventory.SpecificCategoryProductList("Hoodie")) {
-            System.out.print(element + "  ");
-        }
         try (Scanner scanner = new Scanner(System.in)) {
             int repeat = 1;
             while (repeat == 1) {
                 // display:
                 System.out.println(" \n \n Salesperson Menu:");
-            
+
                 System.out.println("1. List of all Transactions");
                 System.out.println("2. Sales Reports");
-                
-                
+
                 System.out.print("Enter your choice: ");
-                
+
                 int choice = scanner.nextInt();
                 switch (choice) {
 
@@ -282,10 +268,8 @@ public class Final_Project {
             System.out.println("Invalid input. Please enter a valid integer.");
         } catch (NoSuchElementException e) {
             System.out.println("Session Expired. Please log in again!");
+        }
     }
-    }
-    
-    
 
     private static Employee authenticateUser(List<Employee> employees) {
         Scanner scanner = new Scanner(System.in);
@@ -293,7 +277,7 @@ public class Final_Project {
         String enteredName = scanner.next();
         System.out.print("Enter your password: ");
         String enteredPassword = scanner.next();
-    
+
         for (Employee employee : employees) {
             if (employee.authenticate(enteredName, enteredPassword)) {
                 return employee;
@@ -302,5 +286,5 @@ public class Final_Project {
         System.out.println("Authentication failed. Exiting...");
         return null;
     }
-    
+
 }
